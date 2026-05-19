@@ -1,4 +1,5 @@
 import 'package:checkout_payment/core/utils/styles.dart';
+import 'package:checkout_payment/features/chechout/presentation/views/my_cart_view_body.dart';
 import 'package:flutter/material.dart';
 
 class MyCartView extends StatelessWidget {
@@ -8,12 +9,13 @@ class MyCartView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: Icon(Icons.arrow_back_ios_new_outlined,),
+        leading: Icon(Icons.arrow_back_ios_new_outlined),
         backgroundColor: Colors.transparent,
         elevation: 0,
         centerTitle: true,
         title: Text('My card', style: Styles.style25),
       ),
+      body: MyCartViewBody(),
     );
   }
 }
