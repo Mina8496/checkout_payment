@@ -40,4 +40,12 @@ abstract class Styles {
     fontWeight: FontWeight.w600,
     height: 0,
   );
+
+  static TextStyle style22 = TextStyle(
+    color: Colors.black,
+    fontSize: 22,
+    fontFamily: 'Inter',
+    fontWeight: FontWeight.w600,
+    height: 0,
+  );
 }

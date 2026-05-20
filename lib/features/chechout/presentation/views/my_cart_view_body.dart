@@ -1,3 +1,4 @@
+import 'package:checkout_payment/features/chechout/presentation/views/widgets/custom_button.dart';
 import 'package:checkout_payment/features/chechout/presentation/views/widgets/order_info_item.dart';
 import 'package:checkout_payment/features/chechout/presentation/views/widgets/total_price.dart';
 import 'package:flutter/material.dart';
@@ -24,6 +25,9 @@ class MyCartViewBody extends StatelessWidget {
           const Divider(height: 34, thickness: 2, color: Color(0xffC7C7C7)),
 
           TotalPrice(title: "Total", value: '\$50.97'),
+          SizedBox(height: 16),
+          CustomButton(),
+          SizedBox(height: 12),
         ],
       ),
     );
