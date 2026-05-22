@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class PaymentMethodItem extends StatelessWidget {
   final bool isActive;
 
-  const PaymentMethodItem({super.key, required this.isActive});
+  const PaymentMethodItem({super.key, this.isActive = false});
 
   @override
   Widget build(BuildContext context) {
@@ -19,9 +19,9 @@ class PaymentMethodItem extends StatelessWidget {
           ),
           borderRadius: BorderRadius.circular(15),
         ),
-        shadows: const [
+        shadows: [
           BoxShadow(
-            color: Colors.green,
+            color: isActive ? Colors.green : Colors.grey,
             blurRadius: 4,
             offset: Offset(0, 0),
             spreadRadius: 0,
