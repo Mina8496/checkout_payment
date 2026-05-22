@@ -1,5 +1,6 @@
 import 'package:checkout_payment/features/chechout/presentation/views/widgets/custom_button.dart';
 import 'package:checkout_payment/features/chechout/presentation/views/widgets/order_info_item.dart';
+import 'package:checkout_payment/features/chechout/presentation/views/widgets/payment_method_Item.dart';
 import 'package:checkout_payment/features/chechout/presentation/views/widgets/total_price.dart';
 import 'package:flutter/material.dart';
 
@@ -26,10 +27,29 @@ class MyCartViewBody extends StatelessWidget {
 
           TotalPrice(title: "Total", value: '\$50.97'),
           SizedBox(height: 16),
-          CustomButton(),
+          CustomButton(
+            text: 'Complete Payment',
+            onTap: () {
+              showModalBottomSheet(
+                context: context,
+                builder: (context) {
+                  return PaymentMethodBottonSheet();
+                },
+              );
+            },
+          ),
           SizedBox(height: 40),
         ],
       ),
     );
+  }
+}
+
+class PaymentMethodBottonSheet extends StatelessWidget {
+  const PaymentMethodBottonSheet({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return PaymentMethodItem(isActive: true);
   }
 }
