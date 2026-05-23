@@ -26,4 +26,8 @@ class StripeService {
       ),
     );
   }
+
+  Future displayPaymentSheet() async {
+    Stripe.instance.presentPaymentSheet();
+  }
 }
