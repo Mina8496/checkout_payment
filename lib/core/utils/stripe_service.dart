@@ -1,4 +1,4 @@
-import 'package:checkout_payment/core/utils/api_key.dart';
+import 'package:checkout_payment/core/utils/api_keys.dart';
 import 'package:checkout_payment/core/utils/api_service.dart';
 import 'package:checkout_payment/features/chechout/data/models/payment_intent_input_model.dart';
 import 'package:checkout_payment/features/chechout/data/models/payment_intent_model/payment_intent_model.dart';
@@ -12,7 +12,7 @@ class StripeService {
     var response = await apiService.post(
       body: paymentIntentInputModel.toJson(),
       url: 'https://api.stripe.com/v1/payment_intents',
-      token: ApiKey.secretKey,
+      token: ApiKeys.secretKey,
     );
     var paymentIntentModel = PaymentIntentModel.fromJson(response.data);
     return paymentIntentModel;
