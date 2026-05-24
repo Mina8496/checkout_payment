@@ -1,3 +1,4 @@
+import 'package:checkout_payment/features/chechout/data/models/payment_intent_input_model.dart';
 import 'package:checkout_payment/features/chechout/presentation/manger/cubit/payment_cubit.dart';
 import 'package:checkout_payment/features/chechout/presentation/views/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
@@ -11,9 +12,12 @@ class CustomButtonBlocConsumer extends StatelessWidget {
     return BlocConsumer<PaymentCubit, PaymentState>(
       listener: (context, state) {
         if (state is PaymentSuccess) {
-         Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => Scaffold(
-           body: Center(child: Text('Payment Success'),),
-         )));
+          Navigator.of(context).pushReplacement(
+            MaterialPageRoute(
+              builder: (context) =>
+                  Scaffold(body: Center(child: Text('Payment Success'))),
+            ),
+          );
         }
         if (state is PaymentFailure) {
           SnackBar snackBar = SnackBar(content: Text(state.errMessage));
@@ -23,7 +27,15 @@ class CustomButtonBlocConsumer extends StatelessWidget {
       builder: (context, state) {
         return CustomButton(
           isLoading: state is PaymentLoading ? true : false,
-          text: 'Continue', onTap: () {});
+          text: 'Continue',
+          onTap: () {
+            PaymentIntentInputModel paymentIntentInputModel =
+                PaymentIntentInputModel(amount: "100", currency: 'USD');
+            BlocProvider.of<PaymentCubit>(
+              context,
+            ).makePayment(paymentIntentInputModel: paymentIntentInputModel);
+          },
+        );
       },
     );
   }
