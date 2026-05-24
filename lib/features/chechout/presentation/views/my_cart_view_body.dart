@@ -1,8 +1,11 @@
+import 'package:checkout_payment/features/chechout/data/repos/checkout_repo_impl.dart';
+import 'package:checkout_payment/features/chechout/presentation/manger/cubit/payment_cubit.dart';
 import 'package:checkout_payment/features/chechout/presentation/views/widgets/custom_button.dart';
 import 'package:checkout_payment/features/chechout/presentation/views/widgets/order_info_item.dart';
-import 'package:checkout_payment/features/chechout/presentation/views/widgets/payment_method_Item.dart';
+import 'package:checkout_payment/features/chechout/presentation/views/widgets/payment_methods_bottom_sheet.dart';
 import 'package:checkout_payment/features/chechout/presentation/views/widgets/total_price.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class MyCartViewBody extends StatelessWidget {
   const MyCartViewBody({super.key});
@@ -33,7 +36,10 @@ class MyCartViewBody extends StatelessWidget {
               showModalBottomSheet(
                 context: context,
                 builder: (context) {
-                  return PaymentMethodBottonSheet();
+                  return BlocProvider(
+                    create: (context) => PaymentCubit(CheckoutRepoImpl()),
+                    child: PaymentMethodsBottomSheet(),
+                  );
                 },
               );
             },
@@ -42,14 +48,5 @@ class MyCartViewBody extends StatelessWidget {
         ],
       ),
     );
-  }
-}
-
-class PaymentMethodBottonSheet extends StatelessWidget {
-  const PaymentMethodBottonSheet({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return PaymentMethodItem(isActive: true);
   }
 }
