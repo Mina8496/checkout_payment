@@ -1,36 +1,30 @@
-import 'package:checkout_payment/core/utils/styles.dart';
+import 'package:checkout_payment/features/chechout/presentation/manger/cubit/payment_cubit.dart';
+import 'package:checkout_payment/features/chechout/presentation/views/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CustomButtonBlocConsumer extends StatelessWidget {
-  final String text;
-  final void Function()? onTap;
-  final bool isLoading;
-  const CustomButtonBlocConsumer({
-    super.key,
-    required this.onTap,
-    required this.text,
-    this.isLoading = false,
-  });
+  const CustomButtonBlocConsumer({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onTap,
-      child: Container(
-        width: double.infinity,
-        height: 73,
-        decoration: ShapeDecoration(
-          color: Color(0xff34A853),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadiusGeometry.circular(15),
-          ),
-        ),
-        child: Center(
-          child: isLoading
-              ? CircularProgressIndicator()
-              : Text(text, textAlign: TextAlign.center, style: Styles.style22),
-        ),
-      ),
+    return BlocConsumer<PaymentCubit, PaymentState>(
+      listener: (context, state) {
+        if (state is PaymentSuccess) {
+         Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => Scaffold(
+           body: Center(child: Text('Payment Success'),),
+         )));
+        }
+        if (state is PaymentFailure) {
+          SnackBar snackBar = SnackBar(content: Text(state.errMessage));
+          ScaffoldMessenger.of(context).showSnackBar(snackBar);
+        }
+      },
+      builder: (context, state) {
+        return CustomButton(
+          isLoading: state is PaymentLoading ? true : false,
+          text: 'Continue', onTap: () {});
+      },
     );
   }
 }

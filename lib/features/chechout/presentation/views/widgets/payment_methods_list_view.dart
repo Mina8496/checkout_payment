@@ -2,9 +2,8 @@ import 'package:checkout_payment/features/chechout/presentation/views/widgets/pa
 import 'package:flutter/material.dart';
 
 class PaymentMethodsListView extends StatefulWidget {
-  const PaymentMethodsListView({super.key, required this.updatePaymentMethod});
+  const PaymentMethodsListView({super.key});
 
-  final Function({required int index}) updatePaymentMethod;
   @override
   State<PaymentMethodsListView> createState() => _PaymentMethodsListViewState();
 }
@@ -12,7 +11,7 @@ class PaymentMethodsListView extends StatefulWidget {
 class _PaymentMethodsListViewState extends State<PaymentMethodsListView> {
   final List<String> paymentMethodsItems = const [
     'assets/images/card.svg',
-    'assets/images/paypal.svg'
+    'assets/images/paypal.svg',
   ];
 
   int activeIndex = 0;
@@ -21,24 +20,24 @@ class _PaymentMethodsListViewState extends State<PaymentMethodsListView> {
     return SizedBox(
       height: 62,
       child: ListView.builder(
-          itemCount: paymentMethodsItems.length,
-          scrollDirection: Axis.horizontal,
-          itemBuilder: (context, index) {
-            return Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8),
-              child: GestureDetector(
-                onTap: () {
-                  activeIndex = index;
-                  setState(() {});
-                  widget.updatePaymentMethod(index: activeIndex);
-                },
-                child: PaymentMethodItem(
-                  isActive: activeIndex == index,
-                  image: paymentMethodsItems[index],
-                ),
+        itemCount: paymentMethodsItems.length,
+        scrollDirection: Axis.horizontal,
+        itemBuilder: (context, index) {
+          return Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 8),
+            child: GestureDetector(
+              onTap: () {
+                activeIndex = index;
+                setState(() {});
+              },
+              child: PaymentMethodItem(
+                isActive: activeIndex == index,
+                image: paymentMethodsItems[index],
               ),
-            );
-          }),
+            ),
+          );
+        },
+      ),
     );
   }
 }
