@@ -28,17 +28,18 @@ class MyCartViewBody extends StatelessWidget {
           OrderInfoItem(title: "Shipping", value: "\$8"),
           const Divider(height: 34, thickness: 2, color: Color(0xffC7C7C7)),
 
-          TotalPrice(title: "Total", value: '\$50.97'),
+          TotalPrice(title: "Total", value: '\$100'),
           SizedBox(height: 16),
           CustomButton(
             text: 'Complete Payment',
             onTap: () {
               showModalBottomSheet(
                 context: context,
+                isScrollControlled: true,
                 builder: (context) {
                   return BlocProvider(
-                    create: (context) => PaymentCubit(CheckoutRepoImpl()),
-                    child: PaymentMethodsBottomSheet(),
+                    create: (_) => PaymentCubit(CheckoutRepoImpl()),
+                    child: const PaymentMethodsBottomSheet(),
                   );
                 },
               );

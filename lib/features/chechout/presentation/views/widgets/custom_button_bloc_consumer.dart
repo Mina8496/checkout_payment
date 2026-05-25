@@ -20,6 +20,7 @@ class CustomButtonBlocConsumer extends StatelessWidget {
           );
         }
         if (state is PaymentFailure) {
+          Navigator.of(context).pop();
           SnackBar snackBar = SnackBar(content: Text(state.errMessage));
           ScaffoldMessenger.of(context).showSnackBar(snackBar);
         }
@@ -29,11 +30,16 @@ class CustomButtonBlocConsumer extends StatelessWidget {
           isLoading: state is PaymentLoading ? true : false,
           text: 'Continue',
           onTap: () {
+            print('Before Cubit');
+
             PaymentIntentInputModel paymentIntentInputModel =
                 PaymentIntentInputModel(amount: "100", currency: 'USD');
+
             BlocProvider.of<PaymentCubit>(
               context,
             ).makePayment(paymentIntentInputModel: paymentIntentInputModel);
+
+            print('After Cubit');
           },
         );
       },

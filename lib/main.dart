@@ -3,8 +3,13 @@ import 'package:checkout_payment/features/chechout/presentation/views/my_cart_vi
 import 'package:flutter/material.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
   Stripe.publishableKey = ApiKeys.publishableKey;
+
+  await Stripe.instance.applySettings();
+
   runApp(const CheckoutApp());
 }
 

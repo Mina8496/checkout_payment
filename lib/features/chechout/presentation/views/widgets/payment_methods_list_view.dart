@@ -10,8 +10,8 @@ class PaymentMethodsListView extends StatefulWidget {
 
 class _PaymentMethodsListViewState extends State<PaymentMethodsListView> {
   final List<String> paymentMethodsItems = const [
-    'assets/images/card.svg',
-    'assets/images/paypal.svg',
+    'assets/images/SVGRepo_iconCarrier.png',
+    'assets/images/Group.png',
   ];
 
   int activeIndex = 0;
